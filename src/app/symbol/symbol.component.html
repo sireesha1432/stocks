@@ -1,21 +1,4 @@
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-md-6">Enter the Stock <span>(Ex: TSLA,AAPL)</span></div>
 
-            <form [formGroup]="symbolSearch" (ngSubmit)="getvalue(symbolSearch.value)">
-                <div class="from-group">
-                    <input class="form-control" type="text" id="StockInput" formControlName="symbol" />
-                </div>
-                <div class="text-center">
-                    <button type="text" id="trackBtn" class="btn btn-primary btn-md"> track</button>
-                </div>
-            </form>
-      
-        <div class="col-md-6">Stock Details 
-            <P>DESCRIPTION: {{this.symbolData?.description}}</P>
-        </div>
-    </div>
-</div> -->
 
 
 <div class="container">
@@ -30,27 +13,29 @@
                     <button type="submit" class="btn btn-primary my-4">track</button>
                 </div>
             </form>
-            <div class="class-md-6" *ngIf="symbolData">
-                <p class="text-center">{{symbolData.description}}</p>
-                <p class="text-center">curtent price: {{quoateData.c}}</p>
-                <p class="text-center">Change: {{quoateData.d}}</p>
-                <p class="text-center">open Price today: {{quoateData.d}}</p>
-                <p class="text-center">Lower Price of The Day: {{quoateData.l}}</p>
-                <p class="text-center">{{symbolData.description}}</p>
+            <div class="class-md-6" *ngFor="let item of stockList">
+                <p class="text-center">{{item.description}}</p>
+                <p class="text-center">Change today: {{item.d}}</p>
+                <p class="text-center">opening Price: {{item.o}}</p>
+                <p class="text-center">current Price: {{item.c}}</p>
+                <p class="text-center">current Price: {{item.h}}</p>
+                
 
-                <div class="sir" >
-                    <div class="student" *ngIf="quoateData">
-                        <!--<a routerLink="/ten"><button (click)="getvalue1(symbolSearch.value)">Go To Social Sentiment Data</button>  </a>-->
-                       <a routerLink="/ten"><button (click)="getvalue2(symbolSearch.value)">Go To Social Sentiment Data</button> </a>
-                        
+
+                <div class="sir">
+                    <div class="student">
+                       
+                        <a [routerLink]="['/ten',item.symbol]" [state]="{name:item.description}"
+                            class="btn btn-primary active mt-4">Go To Social Sentiment Data </a>
+                        <router-outlet></router-outlet>
                     </div>
+                 
                 </div>
-                 <router-outlet></router-outlet>
-               
+                 
+
             </div>
+
 
         </div>
     </div>
 </div>
-
-
